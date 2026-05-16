@@ -1,0 +1,807 @@
+<!DOCTYPE html>
+<html lang="nb">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Flate AS — Profesjonell Maling i Hønefoss, Oslo & Drammen</title>
+  <meta name="description" content="Flate AS leverer profesjonell innvendig og utvendig maling i Hønefoss, Oslo og Drammen. Gratis befaring og prisoverslag. Ring oss i dag."/>
+  <link rel="icon" type="image/svg+xml" href="favicon.svg">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <style>
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+    :root {
+      --red:      #C8102E;
+      --red-d:    #A00D24;
+      --red-l:    rgba(200,16,46,.08);
+      --red-m:    rgba(200,16,46,.15);
+      --ink:      #1A1008;
+      --ink2:     #3D2B1F;
+      --body:     #5C4A3C;
+      --muted:    #8C7B70;
+      --dim:      #B5A89F;
+      --bg:       #FAFAF8;
+      --bg2:      #F3F1ED;
+      --border:   #E8E2DA;
+      --border2:  #D6CECC;
+      --white:    #FFFFFF;
+    }
+
+    html { scroll-behavior: smooth; }
+    body {
+      background: var(--bg);
+      color: var(--ink);
+      font-family: 'DM Sans', sans-serif;
+      line-height: 1.65;
+      overflow-x: hidden;
+    }
+
+    /* Grain texture */
+    body::after {
+      content: '';
+      position: fixed; inset: 0; z-index: 9999; pointer-events: none;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.03'/%3E%3C/svg%3E");
+      opacity: .4;
+    }
+
+    h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -.01em; line-height: 1.15; }
+    em { font-style: italic; }
+
+    /* ── Scroll reveal ── */
+    .rv { opacity: 0; transform: translateY(24px); transition: opacity .7s ease, transform .7s ease; }
+    .rv.in { opacity: 1; transform: none; }
+    .d1 { transition-delay: .1s; } .d2 { transition-delay: .2s; } .d3 { transition-delay: .3s; } .d4 { transition-delay: .4s; }
+
+    /* ── Layout ── */
+    .wrap { max-width: 1140px; margin: 0 auto; padding: 0 2rem; }
+    .section-label {
+      display: inline-flex; align-items: center; gap: .5rem;
+      font-size: .68rem; font-weight: 600; letter-spacing: .16em; text-transform: uppercase;
+      color: var(--red); margin-bottom: 1.1rem;
+    }
+    .section-label::before { content: ''; width: 24px; height: 1.5px; background: var(--red); }
+
+    /* ── MOBILE MENU ── */
+    .mobile-overlay {
+      display: none; position: fixed; inset: 0; z-index: 98;
+      background: var(--white); flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
+    }
+    .mobile-overlay.open { display: flex; }
+    .mobile-overlay a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); text-decoration: none; transition: color .2s; }
+    .mobile-overlay a:hover { color: var(--red); }
+    .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--muted); padding: .5rem; }
+    .mobile-cta { background: var(--red) !important; color: #fff !important; font-family: 'DM Sans', sans-serif !important; font-size: .9rem !important; font-weight: 600 !important; padding: .8rem 2rem !important; border-radius: 6px !important; }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      padding: 1.25rem 2rem; display: flex; align-items: center; justify-content: space-between;
+      transition: background .3s, border-color .3s, padding .3s, box-shadow .3s;
+      border-bottom: 1px solid transparent;
+    }
+    nav.scrolled {
+      background: rgba(250,250,248,.95); backdrop-filter: blur(16px);
+      border-color: var(--border); padding: .85rem 2rem;
+      box-shadow: 0 1px 24px rgba(26,16,8,.06);
+    }
+    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 900; color: var(--ink); text-decoration: none; letter-spacing: -.02em; }
+    .nav-logo span { color: var(--red); }
+    .nav-links { display: flex; gap: 2.25rem; list-style: none; }
+    .nav-links a { font-size: .85rem; font-weight: 500; color: var(--body); text-decoration: none; transition: color .2s; letter-spacing: .01em; }
+    .nav-links a:hover { color: var(--red); }
+    .nav-cta {
+      background: var(--red); color: #fff; font-size: .82rem; font-weight: 600;
+      padding: .55rem 1.25rem; border-radius: 6px; text-decoration: none;
+      transition: background .2s, transform .15s;
+    }
+    .nav-cta:hover { background: var(--red-d); transform: translateY(-1px); }
+    .hamburger { display: none; flex-direction: column; gap: 5px; background: none; border: none; cursor: pointer; padding: .4rem; }
+    .hamburger span { display: block; width: 22px; height: 2px; background: var(--ink); border-radius: 2px; transition: all .3s; }
+
+    /* ── HERO ── */
+    #hero {
+      min-height: 100vh; position: relative; overflow: hidden;
+      display: flex; flex-direction: column; justify-content: flex-end;
+      padding: 7rem 2rem 5rem;
+    }
+    .hero-img {
+      position: absolute; inset: 0;
+      background: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&q=85') center/cover no-repeat;
+    }
+    .hero-img::after {
+      content: ''; position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,16,8,.82) 0%, rgba(26,16,8,.4) 50%, rgba(26,16,8,.15) 100%);
+    }
+    .hero-inner { max-width: 1140px; margin: 0 auto; width: 100%; position: relative; z-index: 2; }
+    .hero-label { color: rgba(255,255,255,.7); margin-bottom: 1.5rem; }
+    .hero-label::before { background: rgba(255,255,255,.5); }
+    h1.hero-h1 {
+      font-size: clamp(2.8rem, 6vw, 5.5rem); font-weight: 900; color: #fff;
+      margin-bottom: 1.25rem; line-height: 1.05; max-width: 780px;
+    }
+    h1.hero-h1 em { color: var(--red); font-style: italic; }
+    .hero-sub { font-size: clamp(.95rem, 1.6vw, 1.1rem); color: rgba(255,255,255,.78); max-width: 520px; margin-bottom: 2.5rem; line-height: 1.75; }
+    .hero-btns { display: flex; gap: 1rem; flex-wrap: wrap; margin-bottom: 3rem; }
+    .btn-primary {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: var(--red); color: #fff; font-weight: 600; font-size: .9rem;
+      padding: .85rem 2rem; border-radius: 6px; text-decoration: none; border: none; cursor: pointer;
+      transition: background .2s, transform .15s;
+    }
+    .btn-primary:hover { background: var(--red-d); transform: translateY(-2px); }
+    .btn-outline {
+      display: inline-flex; align-items: center; gap: .5rem;
+      background: transparent; color: #fff; font-weight: 600; font-size: .9rem;
+      padding: .85rem 2rem; border-radius: 6px; text-decoration: none;
+      border: 1.5px solid rgba(255,255,255,.5); transition: border-color .2s, background .2s;
+    }
+    .btn-outline:hover { border-color: #fff; background: rgba(255,255,255,.08); }
+    .hero-badges { display: flex; gap: 2rem; flex-wrap: wrap; }
+    .hero-badge { display: flex; align-items: center; gap: .5rem; font-size: .8rem; color: rgba(255,255,255,.7); }
+    .hero-badge svg { width: 16px; height: 16px; color: var(--red); flex-shrink: 0; }
+
+    /* ── STATS ── */
+    #stats { background: var(--white); border-bottom: 1px solid var(--border); }
+    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+    .stat-item { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid var(--border); }
+    .stat-item:last-child { border-right: none; }
+    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--red); letter-spacing: -.03em; display: block; line-height: 1; margin-bottom: .35rem; }
+    .stat-lbl { font-size: .78rem; font-weight: 500; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
+
+    /* ── SERVICES ── */
+    #tjenester { padding: 6rem 2rem; }
+    .services-header { display: flex; justify-content: space-between; align-items: flex-end; margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1rem; }
+    .services-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; max-width: 440px; }
+    .services-header p { color: var(--body); font-size: .95rem; max-width: 340px; line-height: 1.75; }
+    .services-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 1.5px; background: var(--border); border: 1.5px solid var(--border); border-radius: 14px; overflow: hidden; }
+    .svc-card { background: var(--white); padding: 2.25rem 2rem; transition: background .25s; position: relative; overflow: hidden; }
+    .svc-card::after { content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 3px; background: var(--red); transform: scaleX(0); transform-origin: left; transition: transform .3s ease; }
+    .svc-card:hover { background: var(--bg); }
+    .svc-card:hover::after { transform: scaleX(1); }
+    .svc-icon { width: 48px; height: 48px; border-radius: 10px; background: var(--red-l); display: flex; align-items: center; justify-content: center; margin-bottom: 1.5rem; }
+    .svc-icon svg { width: 24px; height: 24px; stroke: var(--red); }
+    .svc-card h3 { font-size: 1.15rem; font-weight: 700; margin-bottom: .65rem; color: var(--ink); }
+    .svc-card p { font-size: .88rem; color: var(--body); line-height: 1.75; }
+
+    /* ── ABOUT ── */
+    #om-oss { padding: 6rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+    .about-img { border-radius: 14px; overflow: hidden; position: relative; aspect-ratio: 4/5; }
+    .about-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .about-img-badge {
+      position: absolute; bottom: 2rem; left: 2rem;
+      background: var(--red); color: #fff; border-radius: 10px; padding: 1.25rem 1.5rem;
+    }
+    .about-img-badge .badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; display: block; line-height: 1; }
+    .about-img-badge .badge-lbl { font-size: .75rem; font-weight: 500; opacity: .85; }
+    .about-content h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; margin-bottom: 1.25rem; }
+    .about-content p { color: var(--body); font-size: .95rem; line-height: 1.85; margin-bottom: 1rem; }
+    .about-list { list-style: none; display: flex; flex-direction: column; gap: .6rem; margin: 1.5rem 0 2rem; }
+    .about-list li { display: flex; align-items: flex-start; gap: .75rem; font-size: .9rem; color: var(--body); }
+    .about-list li::before { content: ''; width: 18px; height: 18px; border-radius: 50%; background: var(--red-l); border: 1.5px solid var(--red); display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: .1rem; background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 24 24' fill='none' stroke='%23C8102E' stroke-width='2.5' stroke-linecap='round' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M20 6L9 17l-5-5'/%3E%3C/svg%3E"); background-size: 12px; background-repeat: no-repeat; background-position: center; }
+    .service-areas { display: flex; gap: .5rem; flex-wrap: wrap; margin-top: 1.5rem; }
+    .area-tag { background: var(--bg2); border: 1px solid var(--border); border-radius: 999px; padding: .35rem .85rem; font-size: .78rem; color: var(--body); font-weight: 500; }
+
+    /* ── WHY US ── */
+    #hvorfor { padding: 6rem 2rem; }
+    .why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .why-content h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; margin-bottom: 1rem; }
+    .why-content > p { color: var(--body); font-size: .95rem; line-height: 1.8; margin-bottom: 2.5rem; }
+    .why-features { display: grid; grid-template-columns: 1fr 1fr; gap: 1.25rem; }
+    .why-feat { background: var(--white); border: 1px solid var(--border); border-radius: 10px; padding: 1.25rem; transition: border-color .2s, box-shadow .2s; }
+    .why-feat:hover { border-color: var(--red); box-shadow: 0 4px 16px rgba(200,16,46,.08); }
+    .why-feat-ico { width: 36px; height: 36px; background: var(--red-l); border-radius: 8px; display: flex; align-items: center; justify-content: center; margin-bottom: .75rem; }
+    .why-feat-ico svg { width: 18px; height: 18px; stroke: var(--red); }
+    .why-feat h4 { font-size: .88rem; font-weight: 600; color: var(--ink); margin-bottom: .2rem; font-family: 'DM Sans', sans-serif; }
+    .why-feat p { font-size: .8rem; color: var(--muted); line-height: 1.6; }
+    .why-img { border-radius: 14px; overflow: hidden; aspect-ratio: 4/5; }
+    .why-img img { width: 100%; height: 100%; object-fit: cover; }
+
+    /* ── PROJECTS ── */
+    #prosjekter { padding: 6rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); }
+    .projects-header { text-align: center; margin-bottom: 3.5rem; }
+    .projects-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; margin-bottom: .75rem; }
+    .projects-header p { color: var(--body); max-width: 480px; margin: 0 auto; line-height: 1.75; }
+    .projects-grid { display: grid; grid-template-columns: 2fr 1fr 1fr; grid-template-rows: auto auto; gap: 1rem; }
+    .proj-card { border-radius: 12px; overflow: hidden; position: relative; cursor: pointer; }
+    .proj-card:first-child { grid-row: span 2; }
+    .proj-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform .5s ease; }
+    .proj-card:hover .proj-img { transform: scale(1.04); }
+    .proj-overlay {
+      position: absolute; inset: 0;
+      background: linear-gradient(to top, rgba(26,16,8,.75) 0%, transparent 55%);
+      display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem;
+    }
+    .proj-label { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .2rem; }
+    .proj-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; }
+    .proj-card-sm { aspect-ratio: 4/3; }
+    .proj-card-lg { aspect-ratio: 3/4; }
+
+    /* ── TESTIMONIALS ── */
+    #anmeldelser { padding: 6rem 2rem; }
+    .test-header { text-align: center; margin-bottom: 3.5rem; }
+    .test-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; margin-bottom: .5rem; }
+    .test-header .rating { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .75rem; font-size: .88rem; color: var(--body); }
+    .stars { color: #F59E0B; letter-spacing: 2px; }
+    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
+    .test-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: border-color .2s, box-shadow .2s; }
+    .test-card:hover { border-color: var(--red); box-shadow: 0 8px 32px rgba(200,16,46,.08); }
+    .test-stars { color: #F59E0B; font-size: .85rem; margin-bottom: .9rem; letter-spacing: 2px; }
+    .test-text { font-size: .9rem; color: var(--body); line-height: 1.8; margin-bottom: 1.25rem; font-style: italic; }
+    .test-author { font-weight: 600; font-size: .85rem; color: var(--ink); }
+    .test-where { font-size: .78rem; color: var(--dim); margin-top: .15rem; }
+
+    /* ── CONTACT ── */
+    #kontakt { padding: 6rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
+    .contact-intro h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; margin-bottom: .75rem; }
+    .contact-intro > p { color: var(--body); font-size: .95rem; line-height: 1.8; margin-bottom: 2.5rem; }
+    .contact-info-items { display: flex; flex-direction: column; gap: 1rem; }
+    .ci-item { display: flex; align-items: flex-start; gap: .85rem; }
+    .ci-ico { width: 40px; height: 40px; border-radius: 9px; background: var(--red-l); display: flex; align-items: center; justify-content: center; flex-shrink: 0; }
+    .ci-ico svg { width: 18px; height: 18px; stroke: var(--red); }
+    .ci-label { font-size: .7rem; font-weight: 600; letter-spacing: .06em; text-transform: uppercase; color: var(--dim); margin-bottom: .2rem; }
+    .ci-val { font-size: .92rem; font-weight: 600; color: var(--ink); }
+    .ci-val a { color: var(--ink); text-decoration: none; transition: color .2s; }
+    .ci-val a:hover { color: var(--red); }
+    .map-wrap { border-radius: 12px; overflow: hidden; border: 1px solid var(--border); height: 200px; margin-top: 2rem; }
+    .map-wrap iframe { width: 100%; height: 100%; border: none; display: block; }
+    .form-wrap { background: var(--white); border: 1px solid var(--border); border-radius: 16px; padding: 2.5rem; }
+    .form-wrap h3 { font-size: 1.3rem; font-weight: 900; margin-bottom: 1.5rem; color: var(--ink); }
+    .fg { margin-bottom: 1.1rem; }
+    .fg label { display: block; font-size: .75rem; font-weight: 600; color: var(--muted); margin-bottom: .4rem; letter-spacing: .05em; text-transform: uppercase; }
+    .fg input, .fg textarea, .fg select {
+      width: 100%; padding: .75rem 1rem; background: var(--bg); border: 1.5px solid var(--border);
+      border-radius: 8px; font-family: 'DM Sans', sans-serif; font-size: .9rem; color: var(--ink);
+      outline: none; transition: border-color .2s, background .2s;
+    }
+    .fg input:focus, .fg textarea:focus, .fg select:focus { border-color: var(--red); background: #fff; }
+    .fg input::placeholder, .fg textarea::placeholder { color: var(--dim); }
+    .fg textarea { min-height: 110px; resize: vertical; }
+    .fg-row { display: grid; grid-template-columns: 1fr 1fr; gap: .75rem; }
+    .form-submit { width: 100%; margin-top: .5rem; padding: .9rem; border-radius: 8px; font-size: .95rem; justify-content: center; }
+    .form-success { display: none; margin-top: 1rem; padding: .9rem; background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.25); border-radius: 8px; color: #15803d; font-size: .85rem; text-align: center; font-weight: 600; }
+
+    /* ── FOOTER ── */
+    footer { background: var(--red); color: #fff; padding: 3.5rem 2rem 2rem; }
+    .foot-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,.2); margin-bottom: 2rem; }
+    .foot-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 1rem; display: block; }
+    .foot-logo span { opacity: .7; }
+    .foot-desc { font-size: .85rem; color: rgba(255,255,255,.75); line-height: 1.75; max-width: 260px; }
+    .foot-col-title { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 1rem; }
+    .foot-links { list-style: none; display: flex; flex-direction: column; gap: .55rem; }
+    .foot-links a { font-size: .88rem; color: rgba(255,255,255,.8); text-decoration: none; transition: color .2s; }
+    .foot-links a:hover { color: #fff; }
+    .foot-contact-item { display: flex; gap: .6rem; align-items: flex-start; margin-bottom: .75rem; }
+    .foot-contact-item svg { width: 15px; height: 15px; stroke: rgba(255,255,255,.6); flex-shrink: 0; margin-top: .15rem; }
+    .foot-contact-item span { font-size: .85rem; color: rgba(255,255,255,.8); }
+    .foot-bottom { max-width: 1140px; margin: 0 auto; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: .75rem; }
+    .foot-copy { font-size: .78rem; color: rgba(255,255,255,.55); }
+    .foot-dev { font-size: .78rem; color: rgba(255,255,255,.55); }
+    .foot-dev a { color: rgba(255,255,255,.8); text-decoration: none; font-weight: 600; transition: color .2s; }
+    .foot-dev a:hover { color: #fff; }
+
+    /* ── Mobile FAB ── */
+    .fab-call {
+      position: fixed; bottom: 1.5rem; right: 1.5rem; z-index: 50;
+      display: none; width: 54px; height: 54px; border-radius: 50%;
+      background: var(--red); color: #fff; align-items: center; justify-content: center;
+      box-shadow: 0 4px 20px rgba(200,16,46,.4); text-decoration: none;
+      transition: transform .2s, box-shadow .2s;
+    }
+    .fab-call:hover { transform: scale(1.08); box-shadow: 0 6px 28px rgba(200,16,46,.5); }
+    .fab-call svg { width: 24px; height: 24px; stroke: #fff; }
+
+    /* ── Responsive ── */
+    @media (max-width: 1024px) {
+      .services-grid { grid-template-columns: repeat(2, 1fr); }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .proj-card:first-child { grid-row: auto; }
+      .why-grid, .about-grid { grid-template-columns: 1fr; gap: 2.5rem; }
+      .why-img, .about-img { max-width: 560px; }
+      .foot-grid { grid-template-columns: 1fr 1fr; }
+      .foot-grid > div:first-child { grid-column: 1 / -1; }
+      .foot-desc { max-width: 100%; }
+    }
+    @media (max-width: 768px) {
+      .nav-links, .nav-cta { display: none; }
+      .hamburger { display: flex; }
+      #hero { padding: 6rem 1.5rem 3.5rem; }
+      .stats-grid { grid-template-columns: repeat(2, 1fr); }
+      .stat-item:nth-child(2) { border-right: none; }
+      .stat-item:nth-child(3) { border-top: 1px solid var(--border); border-right: 1px solid var(--border); }
+      .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+      .services-grid { grid-template-columns: 1fr; }
+      .services-header { flex-direction: column; align-items: flex-start; }
+      .contact-grid { grid-template-columns: 1fr; }
+      .test-grid { grid-template-columns: 1fr; }
+      .why-features { grid-template-columns: 1fr; }
+      .projects-grid { grid-template-columns: 1fr 1fr; }
+      .fab-call { display: flex; }
+      #tjenester, #om-oss, #hvorfor, #prosjekter, #anmeldelser, #kontakt { padding: 4rem 1.5rem; }
+      .fg-row { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 540px) {
+      h1.hero-h1 { font-size: 2.4rem; }
+      .projects-grid { grid-template-columns: 1fr; }
+      .foot-grid { grid-template-columns: 1fr; gap: 2rem; }
+      .foot-bottom { flex-direction: column; align-items: flex-start; gap: .5rem; }
+      nav { padding: .85rem 1.25rem; }
+      nav.scrolled { padding: .7rem 1.25rem; }
+      #tjenester, #om-oss, #hvorfor, #prosjekter, #anmeldelser, #kontakt { padding: 3rem 1.25rem; }
+    }
+  </style>
+</head>
+<body>
+
+<!-- Mobile overlay -->
+<div class="mobile-overlay" id="mobileMenu">
+  <button class="mobile-close" onclick="closeMobile()">✕</button>
+  <a href="#tjenester" onclick="closeMobile()">Tjenester</a>
+  <a href="#om-oss" onclick="closeMobile()">Om oss</a>
+  <a href="#prosjekter" onclick="closeMobile()">Prosjekter</a>
+  <a href="#kontakt" onclick="closeMobile()">Kontakt</a>
+  <a href="#kontakt" onclick="closeMobile()" class="mobile-cta">Bestill gratis befaring</a>
+</div>
+
+<!-- Nav -->
+<nav id="nav">
+  <a href="#" class="nav-logo">Flate<span>.</span>AS</a>
+  <ul class="nav-links">
+    <li><a href="#tjenester">Tjenester</a></li>
+    <li><a href="#om-oss">Om oss</a></li>
+    <li><a href="#prosjekter">Prosjekter</a></li>
+    <li><a href="#kontakt">Kontakt</a></li>
+  </ul>
+  <a href="#kontakt" class="nav-cta">Bestill gratis befaring</a>
+  <button class="hamburger" onclick="openMobile()" aria-label="Meny">
+    <span></span><span></span><span></span>
+  </button>
+</nav>
+
+<!-- Hero -->
+<section id="hero">
+  <div class="hero-img"></div>
+  <div class="hero-inner">
+    <div class="section-label hero-label">Profesjonell maling siden 2009</div>
+    <h1 class="hero-h1 rv">
+      Perfekte flater,<br><em>hver gang.</em>
+    </h1>
+    <p class="hero-sub rv d1">
+      Flate AS leverer førsteklasses maling og overflatebehandling i Hønefoss, Oslo og Drammen. Vi møter opp, vi holder avtaler — og vi leverer kvalitet du kan se.
+    </p>
+    <div class="hero-btns rv d2">
+      <a href="#kontakt" class="btn-primary">
+        Bestill gratis befaring
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </a>
+      <a href="#tjenester" class="btn-outline">Se våre tjenester</a>
+    </div>
+    <div class="hero-badges rv d3">
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        500+ fornøyde kunder
+      </div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        Forsikret & sertifisert
+      </div>
+      <div class="hero-badge">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+        Svar innen 24 timer
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Stats -->
+<div id="stats">
+  <div class="stats-grid">
+    <div class="stat-item rv">
+      <span class="stat-num" data-target="500" data-suffix="+">0</span>
+      <span class="stat-lbl">Fornøyde kunder</span>
+    </div>
+    <div class="stat-item rv d1">
+      <span class="stat-num" data-target="15" data-suffix="+">0</span>
+      <span class="stat-lbl">År med erfaring</span>
+    </div>
+    <div class="stat-item rv d2">
+      <span class="stat-num" data-target="3" data-suffix=" byer">0</span>
+      <span class="stat-lbl">Vi dekker</span>
+    </div>
+    <div class="stat-item rv d3">
+      <span class="stat-num" data-target="100" data-suffix="%">0</span>
+      <span class="stat-lbl">Fornøyd-garanti</span>
+    </div>
+  </div>
+</div>
+
+<!-- Tjenester -->
+<section id="tjenester">
+  <div class="wrap">
+    <div class="services-header">
+      <div>
+        <div class="section-label rv">Våre tjenester</div>
+        <h2 class="rv d1">Alt innen profesjonell<br>overflatebehandling.</h2>
+      </div>
+      <p class="rv d2">Fra små oppfriskninger til store prosjekter — vi har kompetansen, utstyret og dedikasjon til å levere resultater du er stolt av.</p>
+    </div>
+    <div class="services-grid">
+      <div class="svc-card rv">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 01-2 2H5a2 2 0 01-2-2z" stroke="currentColor"/><polyline points="9,22 9,12 15,12 15,22" stroke="currentColor"/></svg>
+        </div>
+        <h3>Innvendig maling</h3>
+        <p>Vegger, tak, lister og dører. Vi klargjør alle flater grundig og leverer et finish som er jevnt, holdbart og vakkert.</p>
+      </div>
+      <div class="svc-card rv d1">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor"/><path d="M3 9h18M3 15h18M9 3v18M15 3v18" stroke="currentColor"/></svg>
+        </div>
+        <h3>Utvendig maling</h3>
+        <p>Fasader, vinduer og garasjer. Beskyttelse og estetikk som tåler norsk vær og varer i mange år.</p>
+      </div>
+      <div class="svc-card rv d2">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"/></svg>
+        </div>
+        <h3>Tapetsering</h3>
+        <p>Profesjonell tapetsering med perfekte skjøter og mønstermatch. Alltid. Vi jobber med alle typer tapet.</p>
+      </div>
+      <div class="svc-card rv d3">
+        <div class="svc-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor"/></svg>
+        </div>
+        <h3>Spesialteknikker</h3>
+        <p>Dekorative overflater, kalkmaling og beiseteknikker for unike uttrykk. Vi skaper det du drømmer om.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Om oss -->
+<section id="om-oss">
+  <div class="wrap">
+    <div class="about-grid">
+      <div class="about-img rv">
+        <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=700&q=80" alt="Profesjonell maler fra Flate AS" loading="lazy"/>
+        <div class="about-img-badge">
+          <span class="badge-num">500+</span>
+          <span class="badge-lbl">Fornøyde kunder</span>
+        </div>
+      </div>
+      <div class="about-content rv d2">
+        <div class="section-label">Om oss</div>
+        <h2>Hvem er vi?</h2>
+        <p>Flate AS er et profesjonelt malerfirma lokalisert i Hønefoss som tilbyr maletjenester i Oslo, Drammen, Hønefoss og omegn. Vi spesialiserer oss på både innvendig og utvendig maling.</p>
+        <p>Med solid erfaring i bransjen er vi dedikerte til å levere best mulig service til alle våre kunder. Vi lytter til dine ønsker og leverer kvalitetsarbeid etter dine behov og preferanser.</p>
+        <ul class="about-list">
+          <li>Erfarne og sertifiserte malere</li>
+          <li>Grundig forarbeid og overflatebehandling</li>
+          <li>Førsteklasses materialer og maling</li>
+          <li>Ryddige og punktlige — hver gang, alltid</li>
+          <li>Gratis befaring og prisoverslag</li>
+        </ul>
+        <p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;">Områder vi betjener</p>
+        <div class="service-areas">
+          <span class="area-tag">Hønefoss</span>
+          <span class="area-tag">Oslo</span>
+          <span class="area-tag">Drammen</span>
+          <span class="area-tag">Ringerike</span>
+          <span class="area-tag">Omegn</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Hvorfor velge oss -->
+<section id="hvorfor">
+  <div class="wrap">
+    <div class="why-grid">
+      <div class="why-content">
+        <div class="section-label rv">Hvorfor Flate AS</div>
+        <h2 class="rv d1">Kvalitet i hvert<br>strøk.</h2>
+        <p class="rv d2">Vi er ikke bare malere — vi er håndverkere som er stolt av arbeidet vi leverer. Her er hva som gjør oss annerledes.</p>
+        <div class="why-features rv d3">
+          <div class="why-feat">
+            <div class="why-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" stroke="currentColor"/></svg></div>
+            <h4>Sertifiserte malere</h4>
+            <p>Alle våre malere er sertifiserte og erfarne fagfolk.</p>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke="currentColor"/><path d="M9 12l2 2 4-4" stroke="currentColor"/></svg></div>
+            <h4>Grundig forarbeid</h4>
+            <p>Vi forbereder alle flater nøye — det er nøkkelen til holdbart resultat.</p>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M14 2H6a2 2 0 00-2 2v16a2 2 0 002 2h12a2 2 0 002-2V8z" stroke="currentColor"/><path d="M9 13h6M9 17h4" stroke="currentColor"/></svg></div>
+            <h4>Gratis befaring</h4>
+            <p>Uforpliktende befaring og prisoverslag — helt uten kostnad.</p>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M12 2L2 7l10 5 10-5-10-5zM2 17l10 5 10-5M2 12l10 5 10-5" stroke="currentColor"/></svg></div>
+            <h4>Topp materialer</h4>
+            <p>Vi bruker kun førsteklasses maling og materialer fra ledende leverandører.</p>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="10" stroke="currentColor"/><path d="M12 6v6l4 2" stroke="currentColor"/></svg></div>
+            <h4>Punktlige & ryddige</h4>
+            <p>Vi møter opp til avtalt tid og rydder opp etter oss. Alltid.</p>
+          </div>
+          <div class="why-feat">
+            <div class="why-feat-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M20.84 4.61a5.5 5.5 0 00-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 00-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 000-7.78z" stroke="currentColor"/></svg></div>
+            <h4>Garanti på arbeidet</h4>
+            <p>Vi garanterer for kvaliteten på vårt malerarbeid og vår service.</p>
+          </div>
+        </div>
+      </div>
+      <div class="why-img rv d2">
+        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=700&q=80" alt="Maler i arbeid" loading="lazy"/>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Prosjekter -->
+<section id="prosjekter">
+  <div class="wrap">
+    <div class="projects-header rv">
+      <div class="section-label" style="justify-content:center;">Våre prosjekter</div>
+      <h2>Arbeid vi er stolte av.</h2>
+      <p>Et utvalg av våre fullførte oppdrag — fra stue til fasade.</p>
+    </div>
+    <div class="projects-grid rv d1">
+      <div class="proj-card proj-card-lg">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Innvendig maling - stue" loading="lazy"/>
+        <div class="proj-overlay">
+          <span class="proj-label">Innvendig</span>
+          <span class="proj-title">Stue & kjøkken, Hønefoss</span>
+        </div>
+      </div>
+      <div class="proj-card proj-card-sm">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80" alt="Utvendig maling - fasade" loading="lazy"/>
+        <div class="proj-overlay">
+          <span class="proj-label">Utvendig</span>
+          <span class="proj-title">Fasade, Drammen</span>
+        </div>
+      </div>
+      <div class="proj-card proj-card-sm">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Soverom maling" loading="lazy"/>
+        <div class="proj-overlay">
+          <span class="proj-label">Innvendig</span>
+          <span class="proj-title">Soverom, Oslo</span>
+        </div>
+      </div>
+      <div class="proj-card proj-card-sm">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=600&q=80" alt="Tapetsering" loading="lazy"/>
+        <div class="proj-overlay">
+          <span class="proj-label">Tapetsering</span>
+          <span class="proj-title">Entré, Ringerike</span>
+        </div>
+      </div>
+      <div class="proj-card proj-card-sm">
+        <img class="proj-img" src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=600&q=80" alt="Kontor maling" loading="lazy"/>
+        <div class="proj-overlay">
+          <span class="proj-label">Næringsbygg</span>
+          <span class="proj-title">Kontorlokale, Oslo</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Anmeldelser -->
+<section id="anmeldelser">
+  <div class="wrap">
+    <div class="test-header rv">
+      <div class="section-label" style="justify-content:center;">Kundeanmeldelser</div>
+      <h2>Hva kundene våre sier.</h2>
+      <div class="rating">
+        <span class="stars">★★★★★</span>
+        <strong>5.0</strong> basert på Google-anmeldelser
+      </div>
+    </div>
+    <div class="test-grid">
+      <div class="test-card rv">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Fantastisk resultat! Hele stuen ble som ny. Ryddige, punktlige og utrolig dyktige. Vil definitivt bruke dem igjen."</p>
+        <div class="test-author">Kari Andersen</div>
+        <div class="test-where">Hønefoss</div>
+      </div>
+      <div class="test-card rv d1">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Meget fornøyd med jobben som ble gjort. Profesjonell service fra start til slutt. Prisen var rettferdig og resultatet er utmerket."</p>
+        <div class="test-author">Lars Eriksen</div>
+        <div class="test-where">Drammen</div>
+      </div>
+      <div class="test-card rv d2">
+        <div class="test-stars">★★★★★</div>
+        <p class="test-text">"Brukte Flate AS til å male fasaden. De kom til avtalt tid, jobbet effektivt og huset ser fantastisk ut. Anbefales på det varmeste!"</p>
+        <div class="test-author">Mette Olsen</div>
+        <div class="test-where">Oslo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Kontakt -->
+<section id="kontakt">
+  <div class="wrap">
+    <div class="contact-grid">
+      <div class="contact-intro rv">
+        <div class="section-label">Ta kontakt</div>
+        <h2>Klar for perfekte flater?</h2>
+        <p>Ta kontakt for en uforpliktende befaring og prisoverslag. Vi svarer innen 24 timer og stiller opp når det passer deg.</p>
+        <div class="contact-info-items">
+          <div class="ci-item">
+            <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z" stroke="currentColor"/></svg></div>
+            <div>
+              <div class="ci-label">Telefon</div>
+              <div class="ci-val"><a href="tel:+4712345678">+47 123 45 678</a></div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor"/><polyline points="22,6 12,13 2,6" stroke="currentColor"/></svg></div>
+            <div>
+              <div class="ci-label">E-post</div>
+              <div class="ci-val"><a href="mailto:post@flate.no">post@flate.no</a></div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor"/><circle cx="12" cy="10" r="3" stroke="currentColor"/></svg></div>
+            <div>
+              <div class="ci-label">Lokasjon</div>
+              <div class="ci-val">Hønefoss — betjener Oslo, Drammen & omegn</div>
+            </div>
+          </div>
+          <div class="ci-item">
+            <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2" stroke="currentColor"/><line x1="16" y1="2" x2="16" y2="6" stroke="currentColor"/><line x1="8" y1="2" x2="8" y2="6" stroke="currentColor"/><line x1="3" y1="10" x2="21" y2="10" stroke="currentColor"/></svg></div>
+            <div>
+              <div class="ci-label">Åpningstider</div>
+              <div class="ci-val">Man–Fre 07:00–17:00</div>
+            </div>
+          </div>
+        </div>
+        <div class="map-wrap">
+          <iframe src="https://maps.google.com/maps?q=Hønefoss,+Norway&output=embed" loading="lazy" title="Flate AS lokasjon"></iframe>
+        </div>
+      </div>
+      <div class="rv d2">
+        <div class="form-wrap">
+          <h3>Send oss en melding</h3>
+          <form onsubmit="sendForm(event)">
+            <div class="fg-row">
+              <div class="fg"><label>Fornavn</label><input type="text" id="f-fn" placeholder="Ola" required/></div>
+              <div class="fg"><label>Etternavn</label><input type="text" id="f-ln" placeholder="Nordmann" required/></div>
+            </div>
+            <div class="fg"><label>Telefon</label><input type="tel" id="f-tel" placeholder="+47 xxx xx xxx" required/></div>
+            <div class="fg"><label>E-post</label><input type="email" id="f-email" placeholder="ola@eksempel.no"/></div>
+            <div class="fg">
+              <label>Hva gjelder henvendelsen?</label>
+              <select id="f-type">
+                <option value="Innvendig maling">Innvendig maling</option>
+                <option value="Utvendig maling">Utvendig maling</option>
+                <option value="Tapetsering">Tapetsering</option>
+                <option value="Spesialteknikker">Spesialteknikker</option>
+                <option value="Annet">Annet</option>
+              </select>
+            </div>
+            <div class="fg"><label>Melding</label><textarea id="f-msg" placeholder="Beskriv hva du ønsker hjelp med..."></textarea></div>
+            <button type="submit" class="btn-primary form-submit">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2" fill="currentColor" stroke="none"/></svg>
+              Send melding
+            </button>
+            <div class="form-success" id="f-success">✓ Takk! Vi tar kontakt innen 24 timer.</div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="foot-grid">
+    <div>
+      <span class="foot-logo">Flate<span>.</span>AS</span>
+      <p class="foot-desc">Profesjonelt malerarbeid som gjør din plass vakrere. Perfekte flater, hver gang — i Hønefoss, Oslo og Drammen.</p>
+    </div>
+    <div>
+      <div class="foot-col-title">Navigasjon</div>
+      <ul class="foot-links">
+        <li><a href="#tjenester">Tjenester</a></li>
+        <li><a href="#om-oss">Om oss</a></li>
+        <li><a href="#prosjekter">Prosjekter</a></li>
+        <li><a href="#kontakt">Kontakt</a></li>
+      </ul>
+    </div>
+    <div>
+      <div class="foot-col-title">Kontakt oss</div>
+      <div class="foot-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z" stroke="currentColor"/></svg>
+        <span>+47 123 45 678</span>
+      </div>
+      <div class="foot-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor"/><polyline points="22,6 12,13 2,6" stroke="currentColor"/></svg>
+        <span>post@flate.no</span>
+      </div>
+      <div class="foot-contact-item">
+        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor"/><circle cx="12" cy="10" r="3" stroke="currentColor"/></svg>
+        <span>Hønefoss · Oslo · Drammen</span>
+      </div>
+    </div>
+  </div>
+  <div class="foot-bottom">
+    <span class="foot-copy">© 2026 Flate AS. Alle rettigheter reservert.</span>
+    <span class="foot-dev">Utviklet av <a href="https://www.opticontrol.ai/" target="_blank" rel="noopener noreferrer">OptiControl</a></span>
+  </div>
+</footer>
+
+<!-- Mobile FAB -->
+<a href="tel:+4712345678" class="fab-call" aria-label="Ring oss">
+  <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
+</a>
+
+<script>
+  /* Nav scroll */
+  const nav = document.getElementById('nav');
+  window.addEventListener('scroll', () => { nav.classList.toggle('scrolled', window.scrollY > 40); }, { passive: true });
+
+  /* Mobile menu */
+  function openMobile() { document.getElementById('mobileMenu').classList.add('open'); document.body.style.overflow = 'hidden'; }
+  function closeMobile() { document.getElementById('mobileMenu').classList.remove('open'); document.body.style.overflow = ''; }
+
+  /* Scroll reveal */
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('in'); obs.unobserve(e.target); } });
+  }, { threshold: 0.1 });
+  document.querySelectorAll('.rv').forEach(el => obs.observe(el));
+
+  /* Stats counter */
+  function animateCounter(el) {
+    const target = +el.dataset.target;
+    const suffix = el.dataset.suffix || '';
+    const duration = 1800;
+    const start = performance.now();
+    function step(now) {
+      const p = Math.min((now - start) / duration, 1);
+      const ease = 1 - Math.pow(1 - p, 3);
+      el.textContent = Math.round(ease * target) + suffix;
+      if (p < 1) requestAnimationFrame(step);
+    }
+    requestAnimationFrame(step);
+  }
+  const counterObs = new IntersectionObserver(entries => {
+    entries.forEach(e => { if (e.isIntersecting) { animateCounter(e.target); counterObs.unobserve(e.target); } });
+  }, { threshold: 0.5 });
+  document.querySelectorAll('.stat-num[data-target]').forEach(el => counterObs.observe(el));
+
+  /* Contact form */
+  function sendForm(e) {
+    e.preventDefault();
+    const fn   = document.getElementById('f-fn').value;
+    const ln   = document.getElementById('f-ln').value;
+    const tel  = document.getElementById('f-tel').value;
+    const email = document.getElementById('f-email').value;
+    const type = document.getElementById('f-type').value;
+    const msg  = document.getElementById('f-msg').value;
+    const body = encodeURIComponent(`Navn: ${fn} ${ln}\nTelefon: ${tel}\nE-post: ${email}\nGjelder: ${type}\n\nMelding:\n${msg}`);
+    window.location.href = `mailto:post@flate.no?subject=Henvendelse fra nettside - ${type}&body=${body}`;
+    document.getElementById('f-success').style.display = 'block';
+    e.target.reset();
+  }
+
+  /* Smooth anchor scroll */
+  document.querySelectorAll('a[href^="#"]').forEach(a => {
+    a.addEventListener('click', e => {
+      const id = a.getAttribute('href');
+      if (id === '#') return;
+      const target = document.querySelector(id);
+      if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); closeMobile(); }
+    });
+  });
+</script>
+</body>
+</html>
