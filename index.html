@@ -294,11 +294,48 @@
     .fab-call svg { width: 24px; height: 24px; stroke: #fff; }
 
     /* ── Responsive ── */
+
+    /* About stats */
+    .about-stats { display: grid; grid-template-columns: repeat(4,1fr); gap: 1px; background: var(--border); border: 1px solid var(--border); border-radius: 14px; overflow: hidden; margin: 2rem 0; }
+    .as-item { background: var(--white); padding: 1.4rem 1.25rem; text-align: center; }
+    .as-num { font-family: 'DM Serif Display', serif; font-size: 2.2rem; color: var(--red); display: block; line-height: 1; margin-bottom: .3rem; }
+    .as-lbl { font-size: .72rem; font-weight: 600; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; display: block; }
+
+    /* About two-col with image */
+    .about-with-img { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; margin-bottom: 3rem; }
+    .about-side-img { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; }
+    .about-side-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* Process steps */
+    #prosess { padding: 6rem 2rem; background: var(--white); border-top: 1px solid var(--border); }
+    .process-inner { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: center; }
+    .process-img { border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; }
+    .process-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .process-steps-col { display: flex; flex-direction: column; gap: 1.75rem; }
+    .ps-item { display: flex; gap: 1.25rem; align-items: flex-start; }
+    .ps-num { width: 48px; height: 48px; border-radius: 50%; background: var(--red); color: #fff; font-family: 'DM Serif Display', serif; font-size: 1.25rem; font-weight: 700; display: flex; align-items: center; justify-content: center; flex-shrink: 0; box-shadow: 0 4px 14px rgba(74,124,109,.25); }
+    .ps-body { }
+    .ps-title { font-family: 'DM Serif Display', serif; font-size: 1.05rem; font-weight: 700; margin-bottom: .35rem; color: var(--ink); }
+    .ps-desc { font-size: .86rem; color: var(--body); line-height: 1.7; }
+
+    /* FAQ */
+    #faq { padding: 6rem 2rem; background: var(--bg2); border-top: 1px solid var(--border); }
+    .faq-wrap { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: flex-start; }
+    .faq-side h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; margin-bottom: .75rem; }
+    .faq-side p { color: var(--body); font-size: .95rem; line-height: 1.8; margin-bottom: 2rem; }
+    .faq-cta { }
+    .faq-list { display: flex; flex-direction: column; gap: .65rem; }
+    .faq-item { background: var(--white); border: 1px solid var(--border); border-radius: 12px; overflow: hidden; transition: border-color .2s; }
+    .faq-item:hover { border-color: var(--border2); }
+    .faq-q { width: 100%; background: none; border: none; padding: 1.1rem 1.25rem; cursor: pointer; display: flex; align-items: center; justify-content: space-between; gap: 1rem; font-family: 'DM Sans', sans-serif; font-weight: 600; font-size: .88rem; color: var(--ink); text-align: left; line-height: 1.4; }
+    .faq-arrow { flex-shrink: 0; transition: transform .3s; color: var(--red); width: 18px; height: 18px; }
+    .faq-q.open .faq-arrow { transform: rotate(180deg); }
+    .faq-a { max-height: 0; overflow: hidden; padding: 0 1.25rem; font-size: .86rem; color: var(--body); line-height: 1.8; transition: max-height .35s ease, padding .3s; }
+    .faq-a.open { max-height: 250px; padding: .1rem 1.25rem 1.1rem; }
+
     @media (max-width: 1024px) {
-      .process-steps { grid-template-columns: repeat(2,1fr); }
-      .process-steps::before { display: none; }
-      .about-cols { grid-template-columns: 1fr; }
-      .about-stats { justify-content: flex-start; gap: 2rem; }
+      .process-inner, .faq-wrap, .about-with-img { grid-template-columns: 1fr; gap: 2.5rem; }
+      .about-stats { grid-template-columns: repeat(2,1fr); }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .projects-grid { grid-template-columns: 1fr 1fr; }
       .proj-card:first-child { grid-row: auto; }
@@ -309,6 +346,9 @@
       .foot-desc { max-width: 100%; }
     }
     @media (max-width: 768px) {
+      .process-inner, .faq-wrap, .about-with-img { grid-template-columns: 1fr; gap: 2rem; }
+      .about-stats { grid-template-columns: repeat(2,1fr); }
+      #prosess, #faq { padding: 4rem 1.5rem; }
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       #hero { padding: 6rem 1.5rem 3.5rem; }
@@ -468,36 +508,37 @@
 <!-- Om oss -->
 <section id="om-oss">
   <div class="wrap">
-    <div class="about-content rv">
-      <div class="section-label">Om oss</div>
-      <h2>Hvem er vi?</h2>
-      <p class="about-lead">Flate AS er et profesjonelt malerfirma lokalisert i Hønefoss som tilbyr maletjenester i Oslo, Drammen og omegn. Vi spesialiserer oss på innvendig og utvendig maling, tapetsering og spesialteknikker — og leverer resultater vi er stolte av.</p>
-      <div class="about-cols">
-        <ul class="about-list">
+    <div class="about-with-img">
+      <div class="about-side-img rv">
+        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=800&q=80" alt="Ferdig malerarbeid - lys og luftig stue" loading="lazy"/>
+      </div>
+      <div class="rv d1">
+        <div class="section-label">Om oss</div>
+        <h2>Hvem er vi?</h2>
+        <p style="color:var(--body);font-size:.95rem;line-height:1.85;margin-bottom:1.5rem;">Flate AS er et profesjonelt malerfirma lokalisert i Hønefoss som tilbyr maletjenester i Oslo, Drammen og omegn. Vi spesialiserer oss på innvendig og utvendig maling, tapetsering og spesialteknikker.</p>
+        <ul class="about-list" style="margin-bottom:1.5rem;">
           <li>Erfarne og sertifiserte malere</li>
           <li>Grundig forarbeid og overflatebehandling</li>
           <li>Førsteklasses materialer og maling</li>
-        </ul>
-        <ul class="about-list">
           <li>Ryddige og punktlige — hver gang, alltid</li>
           <li>Gratis befaring og prisoverslag</li>
           <li>Garanti på alt malerarbeid</li>
         </ul>
+        <p style="font-size:.78rem;color:var(--muted);margin-bottom:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;">Områder vi betjener</p>
+        <div class="service-areas">
+          <span class="area-tag">Hønefoss</span>
+          <span class="area-tag">Oslo</span>
+          <span class="area-tag">Drammen</span>
+          <span class="area-tag">Ringerike</span>
+          <span class="area-tag">Omegn</span>
+        </div>
       </div>
-      <div class="about-stats">
-        <div class="as-item"><span class="as-num">15+</span><span class="as-lbl">År i bransjen</span></div>
-        <div class="as-item"><span class="as-num">3</span><span class="as-lbl">Byer vi dekker</span></div>
-        <div class="as-item"><span class="as-num">100%</span><span class="as-lbl">Fornøyd-garanti</span></div>
-        <div class="as-item"><span class="as-num">24t</span><span class="as-lbl">Til prisoverslag</span></div>
-      </div>
-      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;">Områder vi betjener</p>
-      <div class="service-areas">
-        <span class="area-tag">Hønefoss</span>
-        <span class="area-tag">Oslo</span>
-        <span class="area-tag">Drammen</span>
-        <span class="area-tag">Ringerike</span>
-        <span class="area-tag">Omegn</span>
-      </div>
+    </div>
+    <div class="about-stats rv">
+      <div class="as-item"><span class="as-num">15+</span><span class="as-lbl">År i bransjen</span></div>
+      <div class="as-item"><span class="as-num">3</span><span class="as-lbl">Byer vi dekker</span></div>
+      <div class="as-item"><span class="as-num">100%</span><span class="as-lbl">Fornøyd-garanti</span></div>
+      <div class="as-item"><span class="as-num">24t</span><span class="as-lbl">Til prisoverslag</span></div>
     </div>
   </div>
 </section>
@@ -505,31 +546,44 @@
 <!-- Slik jobber vi -->
 <section id="prosess">
   <div class="wrap">
-    <div class="section-head rv" style="text-align:center;margin-bottom:3.5rem;">
-      <div class="section-label" style="justify-content:center;">Prosessen</div>
-      <h2 style="font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;">Slik jobber vi.</h2>
-      <p style="color:var(--body);max-width:480px;margin:.65rem auto 0;line-height:1.75;">Fra første kontakt til ferdig resultat — en enkel og forutsigbar prosess for deg som kunde.</p>
-    </div>
-    <div class="process-steps">
-      <div class="ps-item rv">
-        <div class="ps-num">1</div>
-        <div class="ps-title">Gratis befaring</div>
-        <p class="ps-desc">Vi kommer hjem til deg, ser på jobben og gir deg et konkret prisoverslag uten forpliktelse.</p>
+    <div class="process-inner">
+      <div class="process-img rv">
+        <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=800&q=80" alt="Maler i arbeid" loading="lazy"/>
       </div>
-      <div class="ps-item rv d1">
-        <div class="ps-num">2</div>
-        <div class="ps-title">Avtale & planlegging</div>
-        <p class="ps-desc">Vi avtaler tidspunkt som passer deg og planlegger jobben slik at det forstyrrer deg minst mulig.</p>
-      </div>
-      <div class="ps-item rv d2">
-        <div class="ps-num">3</div>
-        <div class="ps-title">Profesjonelt arbeid</div>
-        <p class="ps-desc">Vi forbereder, maler og leverer. Alt utstyr og materialer tar vi med — du trenger ikke gjøre noe.</p>
-      </div>
-      <div class="ps-item rv d3">
-        <div class="ps-num">4</div>
-        <div class="ps-title">Du godkjenner</div>
-        <p class="ps-desc">Vi gjennomgår resultatet sammen. Er du ikke 100% fornøyd, fikser vi det — uten ekstra kostnad.</p>
+      <div class="rv d1">
+        <div class="section-label">Prosessen</div>
+        <h2 style="font-size:clamp(1.8rem,3vw,2.6rem);font-weight:900;margin-bottom:.75rem;">Slik jobber vi.</h2>
+        <p style="color:var(--body);font-size:.95rem;line-height:1.8;margin-bottom:2rem;">Fra første kontakt til ferdig resultat — en enkel og forutsigbar prosess for deg som kunde.</p>
+        <div class="process-steps-col">
+          <div class="ps-item rv">
+            <div class="ps-num">1</div>
+            <div class="ps-body">
+              <div class="ps-title">Gratis befaring</div>
+              <p class="ps-desc">Vi kommer hjem til deg, ser på jobben og gir deg et konkret prisoverslag uten forpliktelse.</p>
+            </div>
+          </div>
+          <div class="ps-item rv d1">
+            <div class="ps-num">2</div>
+            <div class="ps-body">
+              <div class="ps-title">Avtale & planlegging</div>
+              <p class="ps-desc">Vi avtaler tidspunkt som passer deg og planlegger jobben slik at det forstyrrer deg minst mulig.</p>
+            </div>
+          </div>
+          <div class="ps-item rv d2">
+            <div class="ps-num">3</div>
+            <div class="ps-body">
+              <div class="ps-title">Profesjonelt arbeid</div>
+              <p class="ps-desc">Vi forbereder, maler og leverer. Alt utstyr og materialer tar vi med — du trenger ikke gjøre noe.</p>
+            </div>
+          </div>
+          <div class="ps-item rv d3">
+            <div class="ps-num">4</div>
+            <div class="ps-body">
+              <div class="ps-title">Du godkjenner</div>
+              <p class="ps-desc">Vi gjennomgår resultatet sammen. Er du ikke 100% fornøyd, fikser vi det — uten ekstra kostnad.</p>
+            </div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
@@ -668,12 +722,15 @@
 <!-- FAQ -->
 <section id="faq">
   <div class="wrap">
-    <div class="faq-header rv">
-      <div class="section-label" style="justify-content:center;">Spørsmål & svar</div>
-      <h2>Vanlige spørsmål.</h2>
-      <p>Finner du ikke svaret du leter etter? Ta kontakt — vi svarer gjerne.</p>
-    </div>
-    <div class="faq-list">
+    <div class="faq-wrap">
+      <div class="faq-side rv">
+        <div class="section-label">Spørsmål & svar</div>
+        <h2>Vanlige spørsmål.</h2>
+        <p>Finner du ikke svaret du leter etter? Ring oss eller send en e-post — vi svarer gjerne.</p>
+        <a href="#kontakt" class="btn-primary" style="margin-top:1.5rem;display:inline-flex;">Ta kontakt →</a>
+      </div>
+      <div class="rv d1">
+      <div class="faq-list">
       <div class="faq-item rv">
         <button class="faq-q" onclick="toggleFaq(this)">
           Hva er inkludert i den gratis befaringen?
@@ -716,6 +773,8 @@
         </button>
         <div class="faq-a">Ja. Vi gir garanti på alt malerarbeid vi utfører. Oppstår det problemer med utførelsen innen garantiperioden, kommer vi tilbake og fikser det kostnadsfritt. Vi er ikke ferdig før du er fornøyd.</div>
       </div>
+      </div>
+      </div>
     </div>
   </div>
 </section>
@@ -733,14 +792,14 @@
             <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z" stroke="currentColor"/></svg></div>
             <div>
               <div class="ci-label">Telefon</div>
-              <div class="ci-val"><a href="tel:+4712345678">+47 123 45 678</a></div>
+              <div class="ci-val"><a href="tel:+4793463272">+47 934 63 272</a></div>
             </div>
           </div>
           <div class="ci-item">
             <div class="ci-ico"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor"/><polyline points="22,6 12,13 2,6" stroke="currentColor"/></svg></div>
             <div>
               <div class="ci-label">E-post</div>
-              <div class="ci-val"><a href="mailto:post@flate.no">post@flate.no</a></div>
+              <div class="ci-val"><a href="mailto:kujtim@flate-as.no">kujtim@flate-as.no</a></div>
             </div>
           </div>
           <div class="ci-item">
@@ -815,11 +874,11 @@
       <div class="foot-col-title">Kontakt oss</div>
       <div class="foot-contact-item">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z" stroke="currentColor"/></svg>
-        <span>+47 123 45 678</span>
+        <span>+47 934 63 272</span>
       </div>
       <div class="foot-contact-item">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" stroke="currentColor"/><polyline points="22,6 12,13 2,6" stroke="currentColor"/></svg>
-        <span>post@flate.no</span>
+        <span>kujtim@flate-as.no</span>
       </div>
       <div class="foot-contact-item">
         <svg viewBox="0 0 24 24" fill="none" stroke-width="1.8" stroke-linecap="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" stroke="currentColor"/><circle cx="12" cy="10" r="3" stroke="currentColor"/></svg>
@@ -834,7 +893,7 @@
 </footer>
 
 <!-- Mobile FAB -->
-<a href="tel:+4712345678" class="fab-call" aria-label="Ring oss">
+<a href="tel:+4793463272" class="fab-call" aria-label="Ring oss">
   <svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 01-2.18 2 19.79 19.79 0 01-8.63-3.07A19.5 19.5 0 013.07 9.8 19.79 19.79 0 01.05 1.19 2 2 0 012.03 0h3a2 2 0 012 1.72 12.84 12.84 0 00.7 2.81 2 2 0 01-.45 2.11L6.09 7.91a16 16 0 006 6l1.27-1.27a2 2 0 012.11-.45 12.84 12.84 0 002.81.7A2 2 0 0122 14.92v2z"/></svg>
 </a>
 
@@ -882,7 +941,7 @@
     const type = document.getElementById('f-type').value;
     const msg  = document.getElementById('f-msg').value;
     const body = encodeURIComponent(`Navn: ${fn} ${ln}\nTelefon: ${tel}\nE-post: ${email}\nGjelder: ${type}\n\nMelding:\n${msg}`);
-    window.location.href = `mailto:post@flate.no?subject=Henvendelse fra nettside - ${type}&body=${body}`;
+    window.location.href = `mailto:kujtim@flate-as.no?subject=Henvendelse fra nettside - ${type}&body=${body}`;
     document.getElementById('f-success').style.display = 'block';
     e.target.reset();
   }
