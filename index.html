@@ -295,6 +295,10 @@
 
     /* ── Responsive ── */
     @media (max-width: 1024px) {
+      .process-steps { grid-template-columns: repeat(2,1fr); }
+      .process-steps::before { display: none; }
+      .about-cols { grid-template-columns: 1fr; }
+      .about-stats { justify-content: flex-start; gap: 2rem; }
       .services-grid { grid-template-columns: repeat(2, 1fr); }
       .projects-grid { grid-template-columns: 1fr 1fr; }
       .proj-card:first-child { grid-row: auto; }
@@ -352,6 +356,7 @@
     <li><a href="#tjenester">Tjenester</a></li>
     <li><a href="#om-oss">Om oss</a></li>
     <li><a href="#prosjekter">Prosjekter</a></li>
+    <li><a href="#faq">FAQ</a></li>
     <li><a href="#kontakt">Kontakt</a></li>
   </ul>
   <a href="#kontakt" class="nav-cta">Bestill gratis befaring</a>
@@ -380,8 +385,8 @@
     </div>
     <div class="hero-badges rv d3">
       <div class="hero-badge">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
-        500+ fornøyde kunder
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/></svg>
+        Lokalt & pålitelig
       </div>
       <div class="hero-badge">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -463,34 +468,68 @@
 <!-- Om oss -->
 <section id="om-oss">
   <div class="wrap">
-    <div class="about-grid">
-      <div class="about-img rv">
-        <img src="https://flate-perfect-surfaces.lovable.app/assets/painter-working-BAyLY4_P.jpg" alt="Profesjonell maler fra Flate AS" loading="lazy"/>
-        <div class="about-img-badge">
-          <span class="badge-num">500+</span>
-          <span class="badge-lbl">Fornøyde kunder</span>
-        </div>
-      </div>
-      <div class="about-content rv d2">
-        <div class="section-label">Om oss</div>
-        <h2>Hvem er vi?</h2>
-        <p>Flate AS er et profesjonelt malerfirma lokalisert i Hønefoss som tilbyr maletjenester i Oslo, Drammen, Hønefoss og omegn. Vi spesialiserer oss på både innvendig og utvendig maling.</p>
-        <p>Med solid erfaring i bransjen er vi dedikerte til å levere best mulig service til alle våre kunder. Vi lytter til dine ønsker og leverer kvalitetsarbeid etter dine behov og preferanser.</p>
+    <div class="about-content rv">
+      <div class="section-label">Om oss</div>
+      <h2>Hvem er vi?</h2>
+      <p class="about-lead">Flate AS er et profesjonelt malerfirma lokalisert i Hønefoss som tilbyr maletjenester i Oslo, Drammen og omegn. Vi spesialiserer oss på innvendig og utvendig maling, tapetsering og spesialteknikker — og leverer resultater vi er stolte av.</p>
+      <div class="about-cols">
         <ul class="about-list">
           <li>Erfarne og sertifiserte malere</li>
           <li>Grundig forarbeid og overflatebehandling</li>
           <li>Førsteklasses materialer og maling</li>
+        </ul>
+        <ul class="about-list">
           <li>Ryddige og punktlige — hver gang, alltid</li>
           <li>Gratis befaring og prisoverslag</li>
+          <li>Garanti på alt malerarbeid</li>
         </ul>
-        <p style="font-size:.82rem;color:var(--muted);margin-bottom:.5rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;">Områder vi betjener</p>
-        <div class="service-areas">
-          <span class="area-tag">Hønefoss</span>
-          <span class="area-tag">Oslo</span>
-          <span class="area-tag">Drammen</span>
-          <span class="area-tag">Ringerike</span>
-          <span class="area-tag">Omegn</span>
-        </div>
+      </div>
+      <div class="about-stats">
+        <div class="as-item"><span class="as-num">15+</span><span class="as-lbl">År i bransjen</span></div>
+        <div class="as-item"><span class="as-num">3</span><span class="as-lbl">Byer vi dekker</span></div>
+        <div class="as-item"><span class="as-num">100%</span><span class="as-lbl">Fornøyd-garanti</span></div>
+        <div class="as-item"><span class="as-num">24t</span><span class="as-lbl">Til prisoverslag</span></div>
+      </div>
+      <p style="font-size:.82rem;color:var(--muted);margin-bottom:.65rem;font-weight:600;letter-spacing:.06em;text-transform:uppercase;">Områder vi betjener</p>
+      <div class="service-areas">
+        <span class="area-tag">Hønefoss</span>
+        <span class="area-tag">Oslo</span>
+        <span class="area-tag">Drammen</span>
+        <span class="area-tag">Ringerike</span>
+        <span class="area-tag">Omegn</span>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- Slik jobber vi -->
+<section id="prosess">
+  <div class="wrap">
+    <div class="section-head rv" style="text-align:center;margin-bottom:3.5rem;">
+      <div class="section-label" style="justify-content:center;">Prosessen</div>
+      <h2 style="font-size:clamp(2rem,3.5vw,2.8rem);font-weight:900;">Slik jobber vi.</h2>
+      <p style="color:var(--body);max-width:480px;margin:.65rem auto 0;line-height:1.75;">Fra første kontakt til ferdig resultat — en enkel og forutsigbar prosess for deg som kunde.</p>
+    </div>
+    <div class="process-steps">
+      <div class="ps-item rv">
+        <div class="ps-num">1</div>
+        <div class="ps-title">Gratis befaring</div>
+        <p class="ps-desc">Vi kommer hjem til deg, ser på jobben og gir deg et konkret prisoverslag uten forpliktelse.</p>
+      </div>
+      <div class="ps-item rv d1">
+        <div class="ps-num">2</div>
+        <div class="ps-title">Avtale & planlegging</div>
+        <p class="ps-desc">Vi avtaler tidspunkt som passer deg og planlegger jobben slik at det forstyrrer deg minst mulig.</p>
+      </div>
+      <div class="ps-item rv d2">
+        <div class="ps-num">3</div>
+        <div class="ps-title">Profesjonelt arbeid</div>
+        <p class="ps-desc">Vi forbereder, maler og leverer. Alt utstyr og materialer tar vi med — du trenger ikke gjøre noe.</p>
+      </div>
+      <div class="ps-item rv d3">
+        <div class="ps-num">4</div>
+        <div class="ps-title">Du godkjenner</div>
+        <p class="ps-desc">Vi gjennomgår resultatet sammen. Er du ikke 100% fornøyd, fikser vi det — uten ekstra kostnad.</p>
       </div>
     </div>
   </div>
@@ -538,7 +577,7 @@
         </div>
       </div>
       <div class="why-img rv d2">
-        <img src="https://images.unsplash.com/photo-1589939705384-5185137a7f0f?w=700&q=80" alt="Maler i arbeid" loading="lazy"/>
+        <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=700&q=80" alt="Maler i arbeid" loading="lazy"/>
       </div>
     </div>
   </div>
@@ -621,6 +660,61 @@
         <p class="test-text">"Brukte Flate AS til å male fasaden. De kom til avtalt tid, jobbet effektivt og huset ser fantastisk ut. Anbefales på det varmeste!"</p>
         <div class="test-author">Mette Olsen</div>
         <div class="test-where">Oslo</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- FAQ -->
+<section id="faq">
+  <div class="wrap">
+    <div class="faq-header rv">
+      <div class="section-label" style="justify-content:center;">Spørsmål & svar</div>
+      <h2>Vanlige spørsmål.</h2>
+      <p>Finner du ikke svaret du leter etter? Ta kontakt — vi svarer gjerne.</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item rv">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Hva er inkludert i den gratis befaringen?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Under befaringen kommer vi hjem til deg, ser på arealet som skal males, diskuterer farge- og materialvalg, og gir deg et konkret prisoverslag. Befaringen er alltid gratis og uforpliktende.</div>
+      </div>
+      <div class="faq-item rv d1">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Hvor lang tid tar et vanlig malerarbeid?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Det avhenger av størrelsen på jobben. En vanlig stue klarer vi på 1–2 dager. En hel leilighet tar typisk 3–5 dager. Utvendig maling av en enebolig tar gjerne 4–7 dager avhengig av vær og størrelse. Vi gir alltid en estimert tidsramme i tilbudet.</div>
+      </div>
+      <div class="faq-item rv d2">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Trenger jeg å forberede noe før malerne kommer?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Vi tar oss av det meste. Det hjelper om du fjerner løse gjenstander fra rommene og tar ned bilder fra veggene. Vi dekker møbler, gulv og alt annet med presenninger. Du trenger ikke gjøre noe utover det.</div>
+      </div>
+      <div class="faq-item rv d3">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Bruker dere miljøvennlig maling?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Ja! Vi bruker primært lavemisjonsmaling og vannbaserte produkter med Svanemerket eller tilsvarende miljøsertifisering. Vi kan også diskutere spesifikke produkter om du har ønsker eller behov for dette.</div>
+      </div>
+      <div class="faq-item rv">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Kan dere hjelpe med fargekonsultasjon?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Absolutt. Vi hjelper deg gjerne med å velge farger som passer lyset, romstørrelsen og stilen din. Under befaringen kan vi vise fargevifte og gi råd basert på vår erfaring.</div>
+      </div>
+      <div class="faq-item rv d1">
+        <button class="faq-q" onclick="toggleFaq(this)">
+          Gir dere garanti på arbeidet?
+          <svg class="faq-arrow" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round"><polyline points="6,9 12,15 18,9"/></svg>
+        </button>
+        <div class="faq-a">Ja. Vi gir garanti på alt malerarbeid vi utfører. Oppstår det problemer med utførelsen innen garantiperioden, kommer vi tilbake og fikser det kostnadsfritt. Vi er ikke ferdig før du er fornøyd.</div>
       </div>
     </div>
   </div>
@@ -791,6 +885,14 @@
     window.location.href = `mailto:post@flate.no?subject=Henvendelse fra nettside - ${type}&body=${body}`;
     document.getElementById('f-success').style.display = 'block';
     e.target.reset();
+  }
+
+  /* FAQ accordion */
+  function toggleFaq(btn) {
+    const ans = btn.nextElementSibling;
+    const isOpen = btn.classList.contains('open');
+    document.querySelectorAll('.faq-q.open').forEach(b => { b.classList.remove('open'); b.nextElementSibling.classList.remove('open'); });
+    if (!isOpen) { btn.classList.add('open'); ans.classList.add('open'); }
   }
 
   /* Smooth anchor scroll */
