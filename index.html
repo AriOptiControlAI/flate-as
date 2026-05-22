@@ -7,24 +7,24 @@
   <meta name="description" content="Flate AS leverer profesjonell innvendig og utvendig maling i Hønefoss, Oslo og Drammen. Gratis befaring og prisoverslag. Ring oss i dag."/>
   <link rel="icon" type="image/svg+xml" href="favicon.svg">
   <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,700;0,900;1,700&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
     *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
 
     :root {
-      --red:      #C8102E;
-      --red-d:    #A00D24;
-      --red-l:    rgba(200,16,46,.08);
-      --red-m:    rgba(200,16,46,.15);
-      --ink:      #1A1008;
-      --ink2:     #3D2B1F;
-      --body:     #5C4A3C;
-      --muted:    #8C7B70;
-      --dim:      #B5A89F;
-      --bg:       #FAFAF8;
-      --bg2:      #F3F1ED;
-      --border:   #E8E2DA;
-      --border2:  #D6CECC;
+      --red:      #4A7C6D;
+      --red-d:    #3A6358;
+      --red-l:    rgba(74,124,109,.09);
+      --red-m:    rgba(74,124,109,.15);
+      --ink:      #1F2A3C;
+      --ink2:     #2D3D52;
+      --body:     #4A5E6A;
+      --muted:    #7A8E96;
+      --dim:      #A8BDC2;
+      --bg:       #F8F6F3;
+      --bg2:      #EDE8E1;
+      --border:   #E0D9D0;
+      --border2:  #C9C0B5;
       --white:    #FFFFFF;
     }
 
@@ -45,7 +45,7 @@
       opacity: .4;
     }
 
-    h1, h2, h3, h4 { font-family: 'Playfair Display', Georgia, serif; letter-spacing: -.01em; line-height: 1.15; }
+    h1, h2, h3, h4 { font-family: 'DM Serif Display', Georgia, serif; letter-spacing: -.01em; line-height: 1.15; }
     em { font-style: italic; }
 
     /* ── Scroll reveal ── */
@@ -68,7 +68,7 @@
       background: var(--white); flex-direction: column; align-items: center; justify-content: center; gap: 2rem;
     }
     .mobile-overlay.open { display: flex; }
-    .mobile-overlay a { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); text-decoration: none; transition: color .2s; }
+    .mobile-overlay a { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 700; color: var(--ink); text-decoration: none; transition: color .2s; }
     .mobile-overlay a:hover { color: var(--red); }
     .mobile-close { position: absolute; top: 1.5rem; right: 1.5rem; background: none; border: none; font-size: 1.5rem; cursor: pointer; color: var(--muted); padding: .5rem; }
     .mobile-cta { background: var(--red) !important; color: #fff !important; font-family: 'DM Sans', sans-serif !important; font-size: .9rem !important; font-weight: 600 !important; padding: .8rem 2rem !important; border-radius: 6px !important; }
@@ -85,7 +85,7 @@
       border-color: var(--border); padding: .85rem 2rem;
       box-shadow: 0 1px 24px rgba(26,16,8,.06);
     }
-    .nav-logo { font-family: 'Playfair Display', serif; font-size: 1.35rem; font-weight: 900; color: var(--ink); text-decoration: none; letter-spacing: -.02em; }
+    .nav-logo { font-family: 'DM Serif Display', serif; font-size: 1.35rem; font-weight: 900; color: var(--ink); text-decoration: none; letter-spacing: -.02em; }
     .nav-logo span { color: var(--red); }
     .nav-links { display: flex; gap: 2.25rem; list-style: none; }
     .nav-links a { font-size: .85rem; font-weight: 500; color: var(--body); text-decoration: none; transition: color .2s; letter-spacing: .01em; }
@@ -107,7 +107,7 @@
     }
     .hero-img {
       position: absolute; inset: 0;
-      background: url('https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=1600&q=85') center/cover no-repeat;
+      background: url('https://flate-perfect-surfaces.lovable.app/assets/hero-interior-Bri-pmh4.jpg') center/cover no-repeat;
     }
     .hero-img::after {
       content: ''; position: absolute; inset: 0;
@@ -146,7 +146,7 @@
     .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
     .stat-item { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
-    .stat-num { font-family: 'Playfair Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--red); letter-spacing: -.03em; display: block; line-height: 1; margin-bottom: .35rem; }
+    .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--red); letter-spacing: -.03em; display: block; line-height: 1; margin-bottom: .35rem; }
     .stat-lbl { font-size: .78rem; font-weight: 500; color: var(--muted); letter-spacing: .06em; text-transform: uppercase; }
 
     /* ── SERVICES ── */
@@ -173,7 +173,7 @@
       position: absolute; bottom: 2rem; left: 2rem;
       background: var(--red); color: #fff; border-radius: 10px; padding: 1.25rem 1.5rem;
     }
-    .about-img-badge .badge-num { font-family: 'Playfair Display', serif; font-size: 2rem; font-weight: 900; display: block; line-height: 1; }
+    .about-img-badge .badge-num { font-family: 'DM Serif Display', serif; font-size: 2rem; font-weight: 900; display: block; line-height: 1; }
     .about-img-badge .badge-lbl { font-size: .75rem; font-weight: 500; opacity: .85; }
     .about-content h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 900; margin-bottom: 1.25rem; }
     .about-content p { color: var(--body); font-size: .95rem; line-height: 1.85; margin-bottom: 1rem; }
@@ -214,7 +214,7 @@
       display: flex; flex-direction: column; justify-content: flex-end; padding: 1.25rem;
     }
     .proj-label { font-size: .7rem; font-weight: 600; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,255,255,.7); margin-bottom: .2rem; }
-    .proj-title { font-family: 'Playfair Display', serif; font-size: 1rem; font-weight: 700; color: #fff; }
+    .proj-title { font-family: 'DM Serif Display', serif; font-size: 1rem; font-weight: 700; color: #fff; }
     .proj-card-sm { aspect-ratio: 4/3; }
     .proj-card-lg { aspect-ratio: 3/4; }
 
@@ -264,9 +264,9 @@
     .form-success { display: none; margin-top: 1rem; padding: .9rem; background: rgba(34,197,94,.08); border: 1px solid rgba(34,197,94,.25); border-radius: 8px; color: #15803d; font-size: .85rem; text-align: center; font-weight: 600; }
 
     /* ── FOOTER ── */
-    footer { background: var(--red); color: #fff; padding: 3.5rem 2rem 2rem; }
+    footer { background: #1F2A3C; color: #fff; padding: 3.5rem 2rem 2rem; }
     .foot-grid { max-width: 1140px; margin: 0 auto; display: grid; grid-template-columns: 1.4fr 1fr 1fr; gap: 3rem; padding-bottom: 2.5rem; border-bottom: 1px solid rgba(255,255,255,.2); margin-bottom: 2rem; }
-    .foot-logo { font-family: 'Playfair Display', serif; font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 1rem; display: block; }
+    .foot-logo { font-family: 'DM Serif Display', serif; font-size: 1.5rem; font-weight: 900; color: #fff; margin-bottom: 1rem; display: block; }
     .foot-logo span { opacity: .7; }
     .foot-desc { font-size: .85rem; color: rgba(255,255,255,.75); line-height: 1.75; max-width: 260px; }
     .foot-col-title { font-size: .7rem; font-weight: 600; letter-spacing: .12em; text-transform: uppercase; color: rgba(255,255,255,.55); margin-bottom: 1rem; }
@@ -465,7 +465,7 @@
   <div class="wrap">
     <div class="about-grid">
       <div class="about-img rv">
-        <img src="https://images.unsplash.com/photo-1562259929-b4e1fd3aef09?w=700&q=80" alt="Profesjonell maler fra Flate AS" loading="lazy"/>
+        <img src="https://flate-perfect-surfaces.lovable.app/assets/painter-working-BAyLY4_P.jpg" alt="Profesjonell maler fra Flate AS" loading="lazy"/>
         <div class="about-img-badge">
           <span class="badge-num">500+</span>
           <span class="badge-lbl">Fornøyde kunder</span>
