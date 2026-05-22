@@ -143,7 +143,7 @@
 
     /* ── STATS ── */
     #stats { background: var(--white); border-bottom: 1px solid var(--border); }
-    .stats-grid { display: grid; grid-template-columns: repeat(4,1fr); }
+    .stats-grid { display: grid; grid-template-columns: repeat(3,1fr); }
     .stat-item { padding: 2rem 1.5rem; text-align: center; border-right: 1px solid var(--border); }
     .stat-item:last-child { border-right: none; }
     .stat-num { font-family: 'DM Serif Display', serif; font-size: 2.5rem; font-weight: 900; color: var(--red); letter-spacing: -.03em; display: block; line-height: 1; margin-bottom: .35rem; }
@@ -352,10 +352,9 @@
       .nav-links, .nav-cta { display: none; }
       .hamburger { display: flex; }
       #hero { padding: 6rem 1.5rem 3.5rem; }
-      .stats-grid { grid-template-columns: repeat(2, 1fr); }
-      .stat-item:nth-child(2) { border-right: none; }
-      .stat-item:nth-child(3) { border-top: 1px solid var(--border); border-right: 1px solid var(--border); }
-      .stat-item:nth-child(4) { border-top: 1px solid var(--border); border-right: none; }
+      .stats-grid { grid-template-columns: 1fr; }
+      .stat-item { border-right: none; border-bottom: 1px solid var(--border); }
+      .stat-item:last-child { border-bottom: none; }
       .services-grid { grid-template-columns: 1fr; }
       .services-header { flex-direction: column; align-items: flex-start; }
       .contact-grid { grid-template-columns: 1fr; }
@@ -444,10 +443,6 @@
 <div id="stats">
   <div class="stats-grid">
     <div class="stat-item rv">
-      <span class="stat-num" data-target="500" data-suffix="+">0</span>
-      <span class="stat-lbl">Fornøyde kunder</span>
-    </div>
-    <div class="stat-item rv d1">
       <span class="stat-num" data-target="15" data-suffix="+">0</span>
       <span class="stat-lbl">År med erfaring</span>
     </div>
