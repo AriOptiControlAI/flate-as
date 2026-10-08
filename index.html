@@ -219,20 +219,6 @@
     .proj-card-sm { aspect-ratio: 4/3; }
     .proj-card-lg { aspect-ratio: 3/4; }
 
-    /* ── TESTIMONIALS ── */
-    #anmeldelser { padding: 6rem 2rem; background: var(--white); border-top: 1px solid var(--border); }
-    .test-header { text-align: center; margin-bottom: 3.5rem; }
-    .test-header h2 { font-size: clamp(2rem, 3.5vw, 2.8rem); font-weight: 900; margin-bottom: .5rem; }
-    .test-header .rating { display: flex; align-items: center; justify-content: center; gap: .5rem; margin-top: .75rem; font-size: .88rem; color: var(--body); }
-    .stars { color: #F59E0B; letter-spacing: 2px; }
-    .test-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 1.5rem; }
-    .test-card { background: var(--white); border: 1px solid var(--border); border-radius: 14px; padding: 2rem; transition: border-color .2s, box-shadow .2s; }
-    .test-card:hover { border-color: var(--red); box-shadow: 0 8px 32px rgba(200,16,46,.08); }
-    .test-stars { color: #F59E0B; font-size: .85rem; margin-bottom: .9rem; letter-spacing: 2px; }
-    .test-text { font-size: .9rem; color: var(--body); line-height: 1.8; margin-bottom: 1.25rem; font-style: italic; }
-    .test-author { font-weight: 600; font-size: .85rem; color: var(--ink); }
-    .test-where { font-size: .78rem; color: var(--dim); margin-top: .15rem; }
-
     /* ── CONTACT ── */
     #kontakt { padding: 6rem 2rem; background: var(--white); border-top: 1px solid var(--border); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; }
@@ -360,11 +346,10 @@
       .services-grid { grid-template-columns: 1fr; }
       .services-header { flex-direction: column; align-items: flex-start; }
       .contact-grid { grid-template-columns: 1fr; }
-      .test-grid { grid-template-columns: 1fr; }
       .why-features { grid-template-columns: 1fr; }
       .projects-grid { grid-template-columns: 1fr 1fr; }
       .fab-call { display: flex; }
-      #tjenester, #om-oss, #hvorfor, #prosjekter, #anmeldelser, #kontakt { padding: 4rem 1.5rem; }
+      #tjenester, #om-oss, #hvorfor, #prosjekter, #kontakt { padding: 4rem 1.5rem; }
       .fg-row { grid-template-columns: 1fr; }
     }
     @media (max-width: 540px) {
@@ -374,7 +359,7 @@
       .foot-bottom { flex-direction: column; align-items: flex-start; gap: .5rem; }
       nav { padding: .85rem 1.25rem; }
       nav.scrolled { padding: .7rem 1.25rem; }
-      #tjenester, #om-oss, #hvorfor, #prosjekter, #anmeldelser, #kontakt { padding: 3rem 1.25rem; }
+      #tjenester, #om-oss, #hvorfor, #prosjekter, #kontakt { padding: 3rem 1.25rem; }
     }
   </style>
 </head>
@@ -645,72 +630,18 @@
     <div class="projects-grid rv d1">
       <div class="proj-card proj-card-lg">
         <img class="proj-img" src="https://images.unsplash.com/photo-1556909114-f6e7ad7d3136?w=800&q=80" alt="Innvendig maling - stue" loading="lazy"/>
-        <div class="proj-overlay">
-          <span class="proj-label">Innvendig</span>
-          <span class="proj-title">Stue & kjøkken, Hønefoss</span>
-        </div>
       </div>
       <div class="proj-card proj-card-sm">
         <img class="proj-img" src="https://images.unsplash.com/photo-1503387762-592deb58ef4e?w=600&q=80" alt="Utvendig maling - fasade" loading="lazy"/>
-        <div class="proj-overlay">
-          <span class="proj-label">Utvendig</span>
-          <span class="proj-title">Fasade, Drammen</span>
-        </div>
       </div>
       <div class="proj-card proj-card-sm">
         <img class="proj-img" src="https://images.unsplash.com/photo-1586023492125-27b2c045efd7?w=600&q=80" alt="Soverom maling" loading="lazy"/>
-        <div class="proj-overlay">
-          <span class="proj-label">Innvendig</span>
-          <span class="proj-title">Soverom, Oslo</span>
-        </div>
       </div>
       <div class="proj-card proj-card-sm">
         <img class="proj-img" src="https://images.unsplash.com/photo-1541123437800-1bb1317badc2?w=600&q=80" alt="Tapetsering" loading="lazy"/>
-        <div class="proj-overlay">
-          <span class="proj-label">Tapetsering</span>
-          <span class="proj-title">Entré, Ringerike</span>
-        </div>
       </div>
       <div class="proj-card proj-card-sm">
         <img class="proj-img" src="https://images.unsplash.com/photo-1560185893-a55cbc8c57e8?w=600&q=80" alt="Kontor maling" loading="lazy"/>
-        <div class="proj-overlay">
-          <span class="proj-label">Næringsbygg</span>
-          <span class="proj-title">Kontorlokale, Oslo</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<!-- Anmeldelser -->
-<section id="anmeldelser">
-  <div class="wrap">
-    <div class="test-header rv">
-      <div class="section-label" style="justify-content:center;">Kundeanmeldelser</div>
-      <h2>Hva kundene våre sier.</h2>
-      <div class="rating">
-        <span class="stars">★★★★★</span>
-        <strong>5.0</strong> basert på Google-anmeldelser
-      </div>
-    </div>
-    <div class="test-grid">
-      <div class="test-card rv">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-text">"Fantastisk resultat! Hele stuen ble som ny. Ryddige, punktlige og utrolig dyktige. Vil definitivt bruke dem igjen."</p>
-        <div class="test-author">Kari Andersen</div>
-        <div class="test-where">Hønefoss</div>
-      </div>
-      <div class="test-card rv d1">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-text">"Meget fornøyd med jobben som ble gjort. Profesjonell service fra start til slutt. Prisen var rettferdig og resultatet er utmerket."</p>
-        <div class="test-author">Lars Eriksen</div>
-        <div class="test-where">Drammen</div>
-      </div>
-      <div class="test-card rv d2">
-        <div class="test-stars">★★★★★</div>
-        <p class="test-text">"Brukte Flate AS til å male fasaden. De kom til avtalt tid, jobbet effektivt og huset ser fantastisk ut. Anbefales på det varmeste!"</p>
-        <div class="test-author">Mette Olsen</div>
-        <div class="test-where">Oslo</div>
       </div>
     </div>
   </div>
